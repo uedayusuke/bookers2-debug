@@ -1,6 +1,12 @@
 class UsersController < ApplicationController
 	before_action :baria_user, only: [:update]
 
+  def top
+  end
+
+  def about
+  end
+
   def show
   	@user = User.find(params[:id])
   	@books = @user.books
@@ -9,10 +15,15 @@ class UsersController < ApplicationController
 
   def index
   	@users = User.all #一覧表示するためにUserモデルのデータを全て変数に入れて取り出す。
+    @user = User.find(current_user.id)
   	@book = Book.new #new bookの新規投稿で必要（保存処理はbookコントローラー側で実施）
+  end
 
   def edit
   	@user = User.find(params[:id])
+    if @user != current_user
+      redirect_to user_path(current_user)
+    end
   end
 
   def update
@@ -20,7 +31,7 @@ class UsersController < ApplicationController
   	if @user.update(user_params)
   		redirect_to users_path(@user), notice: "successfully updated user!"
   	else
-  		render "show"
+  		render "edit"
   	end
   end
 

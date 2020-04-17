@@ -6,12 +6,13 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <!--ヘッダーの記述-->
-    <<header class="navbar navbar-fixed-top navbar-inverse">
+    <header class="navbar navbar-top navbar-inverse">
       <div class="container">
 
         <nav class="nav navbar-nav navbar-left">
@@ -41,5 +42,6 @@
       <p id="notice"><%= notice %></p> <!--デバイスでnotice設定されているので呼び出してるだけ-->
 
     </div>
+    <%= yield %>
   </body>
 </html>
