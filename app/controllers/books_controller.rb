@@ -43,9 +43,11 @@ class BooksController < ApplicationController
   def update
   	@book = Book.find(params[:id])
   	if @book.update(book_params)
-  		redirect_to @book, notice: "successfully updated book!"
+  		flash[:notice] = "successfully updated book!"
+      redirect_to book_path(@book)
   	else #if文でエラー発生時と正常時のリンク先を枝分かれにしている。
-  		render "edit"
+      flash.now[:alert] = "error"
+      render action: :edit
   	end
   end
 
